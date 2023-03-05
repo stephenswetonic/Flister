@@ -24,6 +24,7 @@
           "user": $currentUser.id
       };
       if (creating) {
+        console.log("playlist created")
         const createdPlaylist = await pb.collection('playlists').create(data);
         selectedPlaylist = createdPlaylist;
         createMovies(createdPlaylist.id);
@@ -51,16 +52,30 @@
       };
       if (movieList[i].isNew) {
         const record = await pb.collection('movies').create(data);
+        movieList[i].recordid = record.id;
+        console.log(record);
       } else {
         console.log('updated record')
+        console.log(movieList[i].recordid);
         const record = await pb.collection('movies').update(movieList[i].recordid, data);
       }
+
+      
+
     }
     creating = false
     editing = false;
     draggable = false;
     viewing = true;
+    //Update isNew in movieList because we are creating/updating it
+    changeIsNewState();
   };
+
+  function changeIsNewState() {
+    for (var i = 0; i < movieList.length; i++) {
+      movieList[i].isNew = false;
+    }
+  }
 
   const drop = (event, target) => {
     event.dataTransfer.dropEffect = 'move'; 
