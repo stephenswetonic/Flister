@@ -43,12 +43,14 @@
     }
 
     function signOut() {
-      pb.authStore.clear();
+        pb.authStore.clear();
     }
 
     getPlaylists();
 
 </script>
+
+{#if $currentUser}
 
 <header class="text-gray-400 bg-gray-900 body-font border-b-2">
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -79,7 +81,7 @@
 {:else}
 
 
-<section class="text-gray-400 body-font bg-gray-900">
+<section class="text-gray-400 body-font bg-gray-900 h-screen">
     
     <div class="container px-2 py-10 mx-auto">
         <h1 class="text-center text-4xl tracking-wide mb-10">My Playlists</h1>
@@ -108,4 +110,5 @@
         </div> 
     </div>
 </section>
+{/if}
 {/if}

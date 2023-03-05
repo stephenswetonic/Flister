@@ -146,6 +146,7 @@
   }
 
   async function addPlaylistsToList() {
+    console.log($currentUser);
     playlistName = selectedPlaylist.title;
     const movies = await pb.collection('movies').getFullList(50, { filter: `playlist="${selectedPlaylist.id}"`, sort : "rank"});
 
@@ -184,8 +185,9 @@
 
 </script>
 
-<section class="text-gray-400 body-font bg-gray-900">
+{#if $currentUser}
 
+<section class="text-gray-400 body-font bg-gray-900">
 
 {#if viewing}
   <div class="flex justify-center py-6">
@@ -199,7 +201,7 @@
       placeholder="Playlist Name"
       type="text"
       bind:value={playlistName}
-      class="bg-gray-900 bg-opacity-20 text-5xl text-center focus:ring-2 focus:border-blue-900 hover:border-gray-700 border-transparent border-2 outline-none text-gray-400 py-1 px-3 leading-8"
+      class="bg-gray-900 bg-opacity-20 w-full text-5xl text-center focus:ring-2 focus:border-blue-900 hover:border-gray-700 border-transparent border-2 outline-none text-gray-400 py-1 px-3 leading-8"
     />
     <!-- Go to playlist builder screen -->
   </form> 
@@ -232,7 +234,7 @@
 
 </section>
 
-<section class="text-gray-400 body-font bg-gray-900">
+<section class="text-gray-400 body-font bg-gray-900 h-screen">
   <div class="container px-5 py-24 mx-auto">
 
     <div class="flex flex-wrap -m-4">
@@ -288,6 +290,7 @@
     </div>
   </div>
 </section>
+{/if}
 
 <style>
   #list-item.is-active {

@@ -13,19 +13,16 @@
     async function signUp() {
       try {
         const data = {
-          username,
-          password,
-          passwordConfirm: password
+          "username": username,
+          "password": password,
+          "passwordConfirm": password,
+          "name": username
         };
         const createdUser = await pb.collection('users').create(data);
         await login();
       } catch (err) {
         console.error(err)
       }
-    }
-  
-    function signOut() {
-      pb.authStore.clear();
     }
   
   </script>
@@ -35,7 +32,7 @@
       <Home/>
 
   {:else}
-    <section class="text-gray-400 bg-gray-900 body-font">
+    <section class="text-gray-400 bg-gray-900 body-font h-screen">
       <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
         <h1 class="text-9xl text-gray font-medium title-font mb-2 md:w-2/5">Flister</h1>
         <div class="lg:w-2/6 md:w-1/2 bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
